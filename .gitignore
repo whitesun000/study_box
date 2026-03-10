@@ -12,3 +12,6 @@ __pycache__/
 # エディタ設定
 .vscode/
 .idea/
+
+# logsフォルダの中身（.logファイル）は無視する
+logs/*.log
