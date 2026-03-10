@@ -1,0 +1,14 @@
+# 仮想環境
+venv/
+.venv
+
+# Pythonのキャッシュ
+__pycache__/
+*.pyc
+
+# ログファイル（作成中のツールの出力結果）
+*.log
+
+# エディタ設定
+.vscode/
+.idea/
