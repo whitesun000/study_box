@@ -16,5 +16,6 @@ class Settings:
     BASE_DIR: Path = Path(__file__).resolve().parent.parent.parent
     STATIC_DIR: str = str(BASE_DIR / "app" / "static")
     TEMPLATE_DIR: str = str(BASE_DIR / "app" / "templates")
+    DB_PATH: str = str(BASE_DIR / "data" / "chat_app.sqlite3")
 
 settings = Settings()

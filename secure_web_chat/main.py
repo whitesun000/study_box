@@ -34,5 +34,9 @@ async def get(request: Request):
 async def login_page(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 
+@app.get("/register", response_class=HTMLResponse)
+async def register_page(request: Request):
+    return templates.TemplateResponse("register.html", {"request": request})
+
 if __name__ == "__main__":
     uvicorn.run(app, host=settings.HOST, port=settings.PORT)
