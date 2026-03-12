@@ -29,3 +29,6 @@ logs/*.log
 # OS固有のキャッシュ
 .DS_Store
 Thumbs.db
+
+# その他
+Q&A.md
