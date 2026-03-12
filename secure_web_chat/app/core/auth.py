@@ -12,12 +12,14 @@ async def login(username: str = Form(...), password: str = Form(...)):
     # 【重要】「?」によるバインド
     # これにより ' OR '1'='1 などの攻撃が無効化されます
     query = "SELECT password FROM users WHERE username = ?"    
-    cursor.execute(query, (username))
+    cursor.execute(query, (username,))
     user = cursor.fetchone()
     conn.close()
 
     if user and verify_password(password, user[0]):
-        return responses.RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
+        res = responses.RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
+        res.set_cookie(key="session_user", value=username, httponly=True)
+        return res
     else:
         return {"status": "fail", "message": "ユーザー名かパスワードが違います。"}
 
@@ -43,3 +45,9 @@ async def register(username: str = Form(...), password: str = Form(...)):
         return {"status": "error", "message": str(e)}
     finally:
         conn.close()
+
+@router.get("/logout")
+async def logout():
+    response = responses.RedirectResponse(url="/login")
+    response.delete_cookie("session_user")
+    return response

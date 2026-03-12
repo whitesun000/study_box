@@ -18,4 +18,6 @@ class Settings:
     TEMPLATE_DIR: str = str(BASE_DIR / "app" / "templates")
     DB_PATH: str = str(BASE_DIR / "data" / "chat_app.sqlite3")
 
+    SESSION_COOKIE_NAME = "session_user"
+
 settings = Settings()

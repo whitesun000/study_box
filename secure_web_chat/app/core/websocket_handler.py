@@ -1,4 +1,5 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+from app.core.config import settings
 from typing import List
 
 # Routerの作成
@@ -24,9 +25,14 @@ manager = ConnectionManager()
 @router.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await manager.connect(websocket)
+
+    user = websocket.cookies.get(settings.SESSION_COOKIE_NAME)
+    if not user:
+        user = "Guest"
+
     try:
         while True:
             data = await websocket.receive_text()
-            await manager.broadcast(f"ユーザー: {data}")
+            await manager.broadcast(f"{user}: {data}")
     except WebSocketDisconnect:
         manager.disconnect(websocket)

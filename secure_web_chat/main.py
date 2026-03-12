@@ -1,6 +1,6 @@
 import uvicorn
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, responses
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -27,8 +27,11 @@ app.include_router(websocket_handler.router)
 app.include_router(auth.router, prefix="/auth")
 
 @app.get("/", response_class=HTMLResponse)
-async def get(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+async def read_index(request: Request):
+    user = request.cookies.get("session_user")
+    if not user:
+        return responses.RedirectResponse(url="/login")
+    return templates.TemplateResponse("index.html", {"request": request, "user": user})
 
 @app.get("/login", response_class=HTMLResponse)
 async def login_page(request: Request):

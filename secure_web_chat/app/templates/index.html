@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/css/nav.css" />
+    <link rel="stylesheet" href="/static/css/base.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
     <title>Secure Web Chat</title>
 </head>
 <body>
     <h1>Secure Web Chat Ecosystem</h1>
+    <div class="nav-container">
+        <span class="user-info">👤 {{ user }} さん</span>
+        <a href="/auth/logout" class="logout-link">ログアウト</a>
+    </div>
+
     <div id="chat-box"></div>
     <div class="input-area">
         <input type="text" id="messageText" placeholder="メッセージを入力..." autocomplete="off"/>
         <button onclick="sendMessage()">送信</button>
     </div>
 
-    <script src="/static/main.js"></script>
+    <script src="/static/js/main.js"></script>
 </body>
 </html>
