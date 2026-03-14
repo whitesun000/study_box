@@ -11,6 +11,8 @@ from app.core import websocket_handler
 from app.core.database import init_db
 from app.core import auth
 
+
+
 # 起動時にDBを準備
 init_db()
 

@@ -1,53 +1,41 @@
 <!DOCTYPE html>
-<html lang="ja">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/nav.css" />
-    <link rel="stylesheet" href="/static/css/base.css" />
-    <link rel="stylesheet" href="/static/css/style.css" />
-    <link rel="stylesheet" href="/static/css/layout.css" />
-    <title>Secure Web Chat</title>
-</head>
+{% block title %}メインチャット - Secure Web Chat{% endblock %}
 
-<body>
-    <div class="game-layout">
-        <main class="main-area">
-            <h1>Secure Web Chat Ecosystem</h1>
-            <div class="nav-container">
-                <span class="user-info">👤 {{ user }} さん</span>
-                <a href="/auth/logout" class="logout-link">ログアウト</a>
-            </div>
+{% block content %}
+<div class="game-layout">
+    <main class="main-area">
+        <h1>Secure Web Chat Ecosystem</h1>
+        <div class="nav-container">
+            <span class="user-info">👤 {{ user }} さん</span>
+            <a href="/auth/logout" class="logout-link">ログアウト</a>
+        </div>
 
-            <div id="chat-box"></div>
-            <div class="input-area">
-                <input type="text" id="messageText" placeholder="メッセージを入力..." autocomplete="off" />
-                <button onclick="sendMessage()">送信</button>
-            </div>
-        </main>
+        <div id="chat-box"></div>
+        <div class="input-area">
+            <input type="text" id="messageText" placeholder="メッセージを入力..." autocomplete="off" />
+            <button onclick="sendMessage()">送信</button>
+        </div>
+    </main>
 
-        <div class="resizer-x" id="drag-x"></div>
+    <div class="resizer-x" id="drag-x"></div>
 
-        <aside class="side-panel">
-            <h3>🛡️ セキュリティ・ラボ</h3>
-            <hr>
-            <div class="mission-item">
-                <p>セキュリティ制御ポータル</p>
-                <button class="btn-attack" onclick="toggleSecurity()">セキュリティモード切替</button>
-            </div>
-        </aside>
+    <aside class="side-panel">
+        <h3>🛡️ セキュリティ・ラボ</h3>
+        <hr>
+        <div class="mission-item">
+            <p>システム操作</p>
+            <button class="btn-attack" onclick="toggleSecurity()">セキュリティモード切替</button>
+            <button class="btn-attack" onclick="requestChatReset()">チャット履歴を消去</button>
+        </div>
+    </aside>
 
-        <div class="resizer-y" id="drag-y"></div>
+    <div class="resizer-y" id="drag-y"></div>
 
-        <footer class="bottom-log" id="log-window">
-            <div>[SYSTEM] サーバーに接続しました。</div>
-            <div>[DEBUG] 脆弱性モード：OFF</div>
-        </footer>
-    </div>
-    <script src="/static/js/main.js"></script>
-    <script src="/static/js/resizer.js"></script>
-    <script src="/static/js/lab.js"></script>
-</body>
-
-</html>
+    <footer class="bottom-log" id="log-window">
+        <div>[SYSTEM] サーバーに接続しました。</div>
+        <div>[DEBUG] 脆弱性モード：OFF</div>
+    </footer>
+</div>
+{% endblock %}

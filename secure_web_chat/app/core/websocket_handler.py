@@ -1,10 +1,11 @@
+import json
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from app.core.config import settings
 from typing import List
+from app.ai.detector import detector
 
 # Routerの作成
 router = APIRouter()
-
 class ConnectionManager:
     def __init__(self):
         self.active_connections: List[WebSocket] = []
@@ -16,9 +17,9 @@ class ConnectionManager:
     def disconnect(self, websocket: WebSocket):
         self.active_connections.remove(websocket)
 
-    async def broadcast(self, message: str):
+    async def broadcast(self, data: dict):
         for connection in self.active_connections:
-            await connection.send_text(message)
+            await connection.send_json(data)
 
 manager = ConnectionManager()
 
@@ -32,7 +33,41 @@ async def websocket_endpoint(websocket: WebSocket):
 
     try:
         while True:
-            data = await websocket.receive_text()
-            await manager.broadcast(f"{user}: {data}")
+            # JSON形式でデータを受信
+            data = await websocket.receive_json()
+            msg_type = data.get("type")
+
+            # 1. 通常のチャット送信処理
+            if msg_type == "chat":
+                raw_text = data.get("message", "")
+
+                # AIでメッセージをスキャン
+                analysis = detector.analyze_message(raw_text, user)
+
+                # 全員にチャットデータを送信
+                await manager.broadcast({
+                    "type": "chat",
+                    "user": user,
+                    "message": raw_text
+                })
+
+                # AIが異常検知した場合、警告を送信
+                if analysis:
+                    await manager.broadcast({
+                        "type": "ai_alert",
+                        "level": analysis["level"],
+                        "message": analysis["alert"]
+                    })
+
+            # 2. チャットリセットのリクエスト処理
+            elif msg_type == "reset_request":
+                # 全員に「画面をクリアせよ」という命令を拡散
+                await manager.broadcast({
+                    "type": "reset_command"
+                })
+
     except WebSocketDisconnect:
+        manager.disconnect(websocket)
+    except Exception as e:
+        print(f"WebSocket Error: {e}")
         manager.disconnect(websocket)

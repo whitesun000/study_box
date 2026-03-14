@@ -1,8 +1,8 @@
 // ログ画面にメッセージを表示する関数
-function appendLog(message, type = 'info') {
+export function appendLog(message, type = 'info') {
     const logWindow = document.getElementById('log-window');
     const entry = document.createElement('div');
-
+    
     // 時刻を取得
     const now = new Date();
     const timeStr = `[${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}]`;
@@ -19,7 +19,7 @@ function appendLog(message, type = 'info') {
 }
 
 // サーバーセキュリティモードを切り替える関数
-async function toggleSecurity(mode) {
+export async function toggleSecurity(mode) {
     try {
         // Python側の @router.post("/toggle_security") を呼び出す
         const response = await fetch('/auth/toggle_security', { method: 'POST'});
@@ -40,7 +40,7 @@ async function toggleSecurity(mode) {
     }
 }
 
-async function checkInitialStatus() {
+export async function checkInitialStatus() {
     const response = await fetch('/auth/security_status');
     const data = await response.json();
     
