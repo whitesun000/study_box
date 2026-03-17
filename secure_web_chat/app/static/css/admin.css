@@ -1,0 +1,45 @@
+/* 十字分割レイアウト */
+.admin-layout {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: #1a1a1a;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+}
+
+.monitor-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 5px;
+    padding: 10px;
+    height: 100%;
+}
+
+.monitor-slot {
+    background: #000;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+}
+
+.admin-sidebar {
+    width: 250px;
+    background: #222;
+    padding: 15px;
+    border-left: 2px solid #444;
+}
+
+#admin-user-list {
+    list-style: none;
+    padding: 0;
+}

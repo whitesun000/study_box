@@ -6,10 +6,10 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
 from app.core.config import settings
-from app.core import websocket_handler
+from app.core import websocket_handler, auth, admin
 
 from app.core.database import init_db
-from app.core import auth
+
 
 
 
@@ -27,6 +27,9 @@ app.include_router(websocket_handler.router)
 
 # 認証用のルーター登録 (プレフィックス "/auth" を付ける)
 app.include_router(auth.router, prefix="/auth")
+
+# 管理者用のルーター登録
+app.include_router(admin.router)
 
 @app.get("/", response_class=HTMLResponse)
 async def read_index(request: Request):

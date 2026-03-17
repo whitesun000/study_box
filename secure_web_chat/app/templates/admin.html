@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理者モニタリングパネル - Secure Web Chat</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+
+<body>
+    <div class="admin-layout">
+        <div id="monitor-grid" class="monitor-grid">
+            <div id="slot-1" class="monitor-slot">
+                <p>NO SIGNAL (1)</p>
+            </div>
+            <div id="slot-2" class="monitor-slot">
+                <p>NO SIGNAL (2)</p>
+            </div>
+            <div id="slot-3" class="monitor-slot">
+                <p>NO SIGNAL (3)</p>
+            </div>
+            <div id="slot-4" class="monitor-slot">
+                <p>NO SIGNAL (4)</p>
+            </div>
+        </div>
+
+        <aside class="admin-sidebar">
+            <div class="infra-stats-panet">
+                <h4>システム状況</h4>
+                <p>接続数: <span id="connection-count">0</span></p>
+                <p>阻止した攻撃: <span id="blocked-count">0</span></p>
+            </div>
+            <hr>
+            <h4>接続ユーザーリスト</h4>
+            <ul id="admin-user-list"></ul>
+        </aside>
+    </div>
+    <script type="module" src="/static/js/admin_app.js"></script>
+</body>
+
+</html>
