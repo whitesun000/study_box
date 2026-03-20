@@ -1,6 +1,8 @@
 // ログ画面にメッセージを表示する関数
 export function appendLog(message, type = 'info') {
     const logWindow = document.getElementById('log-window');
+    if (!logWindow) return;
+
     const entry = document.createElement('div');
     
     // 時刻を取得
@@ -52,21 +54,24 @@ export async function checkInitialStatus() {
 
 // ページ読み込み時に実行
 window.addEventListener('load', () => {
-    // 1. 状態チェックを先に動かす
-    checkInitialStatus();
+    // 1. 状態チェックを先に動かす（ログイン画面がある画面（チャット画面）の時だけ初期チェックを行う）
+    if (document.getElementById('log-window')) {
+        checkInitialStatus();
 
-    // 2. ハッキング演出 (Hackerという名前が含まれる場合のみ)
-    const userInfo = document.querySelector('.user-info');
-    if (userInfo && userInfo.textContent.includes('Hacker')) {
-        appendLog("====================================", "danger");
-        appendLog("[SYSTEM] 警告：不正な認証を検知しました", "danger");
-        appendLog("[SYSTEM] ログインユーザー：UNKNOWN (SQL Injection)", "danger");
-        appendLog("[SYSTEM] データベースの権限が奪取されました。", "danger");
-        appendLog("------------------------------------", "success");
-        appendLog("ハッキング成功：システムを掌握しました。", "success");
-        appendLog("====================================", "success");
+        // 2. ハッキング演出 (Hackerという名前が含まれる場合のみ)
+        const userInfo = document.querySelector('.user-info');
+        if (userInfo && userInfo.textContent.includes('Hacker')) {
+            appendLog("====================================", "danger");
+            appendLog("[SYSTEM] 警告：不正な認証を検知しました", "danger");
+            appendLog("[SYSTEM] ログインユーザー：UNKNOWN (SQL Injection)", "danger");
+            appendLog("[SYSTEM] データベースの権限が奪取されました。", "danger");
+            appendLog("------------------------------------", "success");
+            appendLog("ハッキング成功：システムを掌握しました。", "success");
+            appendLog("====================================", "success");
+        }
     }
 });
 
+    
 
 

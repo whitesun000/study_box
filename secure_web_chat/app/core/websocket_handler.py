@@ -89,7 +89,17 @@ async def websocket_endpoint(websocket: WebSocket):
                         "message": analysis["alert"]
                     })
 
-            # 2. チャットリセットのリクエスト処理
+            # 2.スクリーンデータの転送処理
+            elif msg_type == "screen_data":
+                image_data = data.get("image")
+                # 画像を送ってきたユーザー名を特定して管理者に転送
+                await manager.broadcast({
+                    "type": "screen_data",
+                    "user": user,
+                    "image": image_data
+                })
+
+            # 3. チャットリセットのリクエスト処理
             elif msg_type == "reset_request":
                 # 全員に「画面をクリアせよ」という命令を拡散
                 await manager.broadcast({

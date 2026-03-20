@@ -1,0 +1,73 @@
+/* 画面全体を覆う黒い背景 */
+#security-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+}
+
+/* スキャン画面のカード部分 */
+.scan-card {
+    background: #1a1a1a;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    color: #ecf0f1;
+    max-width: 450px;
+    border: 2px solid #3498db;
+    box-shadow: 0 0 30px rgba(52, 152, 219, 0.3);
+}
+
+.scan-card h2 {
+    color: #3498db;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.scan-card p {
+    margin-bottom: 25px;
+    line-height: 1.6;
+    color: #bdc3c7;
+}
+
+/* スキャン開始ボタン */
+#btn-start-monitor {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#btn-start-monitor:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+/* スキャン中のテキスト演出 */
+#scan-status {
+    margin-top: 25px;
+    font-size: 1rem;
+    color: #3498db;
+    font-weight: bold;
+    display: none;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5 ;}
+}

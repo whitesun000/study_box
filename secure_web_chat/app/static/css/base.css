@@ -1,3 +1,21 @@
+:root {
+    /* メインカラー */
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+
+    /* 背景色 */
+    --bg-main: #f4f7f6;
+    --bg-secondary: #ffffff;
+    --bg-dark: #2c3e50;
+
+    /* テキスト色 */
+    --text-main: #2c3e50;
+    --text-muted: #7f8c8d;
+
+    /* 境界線 */
+    --border-color: #dcdde1;
+}
+
 /* 全画面共通のスタイル */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

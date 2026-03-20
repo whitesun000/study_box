@@ -2,6 +2,7 @@
 // ※jsファイル側でも関数の前に 'export' を付ける必要があります
 import { appendLog, toggleSecurity } from './lab.js';
 import { clearChatLog, displayChatMessage, requestChatReset, sendMessage } from './main.js';
+import { initMonitor } from './monitor.js';
 import { initNetwork } from './network.js';
 import './resizer.js';
 
@@ -34,4 +35,7 @@ window.addEventListener('load', () => {
             }
         )
     }
+
+    // 監視機能の初期化
+    initMonitor();
 });

@@ -1,4 +1,4 @@
-import { updateAdminInterface } from './admin.js';
+import { handleScreenUpdate, updateAdminInterface } from './admin.js';
 import { initNetwork } from './network.js';
 
 window.addEventListener('load', () => {
@@ -14,6 +14,9 @@ window.addEventListener('load', () => {
         // インフラステータス受信
         (data) => { 
             updateAdminInterface(data.connections, data.blocked, data.user_list);
+        },
+        (data) => {
+            handleScreenUpdate(data);
         }
     );
 });

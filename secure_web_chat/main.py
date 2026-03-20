@@ -11,8 +11,6 @@ from app.core import websocket_handler, auth, admin
 from app.core.database import init_db
 
 
-
-
 # 起動時にDBを準備
 init_db()
 
@@ -45,6 +43,10 @@ async def login_page(request: Request):
 @app.get("/register", response_class=HTMLResponse)
 async def register_page(request: Request):
     return templates.TemplateResponse("register.html", {"request": request})
+
+@app.get("/security_check", response_class=HTMLResponse)
+async def get_security_check(request: Request):
+    return templates.TemplateResponse("security_check.html", {"request": request})
 
 if __name__ == "__main__":
     uvicorn.run(app, host=settings.HOST, port=settings.PORT)
