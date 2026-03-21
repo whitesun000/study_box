@@ -5,9 +5,12 @@ def is_text_file(file_path):
     text_extensions = {'.py', '.txt', '.html', '.css', '.md', '.json', '.js', '.php'}
     return Path(file_path).suffix in text_extensions
 
-def export_project_structure(root_dir, log_file):
+def export_project_structure(root_dir, log_file, export_content=True):
     # 不要なディレクトリを除外(適宜変更)
     exclude_dirs = {'.git', '__pycache__', '.venv', '.idea', '.vscode'}
+
+    # ログファイルの親ディレクトリが存在しない場合は作成
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
     with open(log_file, 'w', encoding='utf-8') as f:
         f.write("PROJECT STRUCTURE & CONTENT LOG\n")
@@ -26,7 +29,8 @@ def export_project_structure(root_dir, log_file):
                 file_path = os.path.join(root, file)
                 f.write(f'{sub_indent}📄{file}\n')
 
-                if is_text_file(file_path):
+                # export_content が True の場合のみ中身を書き込む
+                if export_content and is_text_file(file_path):
                     try:
                         with open(file_path, 'r', encoding='utf-8') as code_f:
                             content = code_f.read()
