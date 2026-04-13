@@ -1,0 +1,13 @@
+services:
+  # サービス名（任意）
+  web-app:
+    # カレントディレクトリにあるDockerfileを使ってビルドする
+    build: . 
+    # コンテナが起動した時に実行するコマンド（Webサーバー起動）
+    command: uvicorn main_web:app --host 0.0.0.0 --port 8000
+    # ホストの8000番ポートを、コンテナの8000番に繋ぐ
+    ports:
+      - "8000:8000"
+    # ローカルファイルをコンテナ内に同期させる（コードを書き換えたら即反映）
+    volumes:
+      - .:/workspaces/study_box
