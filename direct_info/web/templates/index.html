@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Info Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <h2>Project Content Extractor (Web版)</h2>
+        <form action="/scan" method="post">
+            <label>スキャン対象フォルダ:</label><br>
+            <input type="text" name="target_path" value="{{ target_path }}" required />
+            <small>※コンテナ内の絶対パスを指定してください</small>
+
+            <div class="input-group">
+                <label>ログ保存先：</label>
+                <input type="text" name="output_path" value="{{ output_path }}" required />
+            </div>
+
+            <div class="options">
+                <label>
+                    <input type="checkbox" name="include_content" value="true" checked />
+                    ファイルの中身もログに書き込む
+                </label>
+            </div>
+
+            <button type="submit">スキャン開始</button>
+
+        {% if result %}
+        <div class="result">
+            <strong>結果:</strong> {{ result }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
