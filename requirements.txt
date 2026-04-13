@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+python-multipart
+jinja2
+cryptography
+bcrypt
+passlib
+python-dotenv
+PyYAML
+watchfiles
+# デスクトップアプリ系なら以下も
+pyinstaller
