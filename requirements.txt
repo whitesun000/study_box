@@ -8,5 +8,7 @@ passlib
 python-dotenv
 PyYAML
 watchfiles
-# デスクトップアプリ系なら以下も
 pyinstaller
+requests
+pandas
+certifi>=2024.2.2
